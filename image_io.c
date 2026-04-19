@@ -28,7 +28,7 @@ Image* load_image(const char* filename) {
 }
 
 int save_image(const char* filename, Image* img) {
-    if (img == NULL || img->bytes == NULL) {
+    if (img == NULL || img->bites == NULL) {
         return 0; 
     }
 
@@ -47,9 +47,9 @@ Image* create_image(int w, int h, int chan) {
     img->height = h;
     img->channels = chan;
 
-    img->bytes = malloc(w * h * chan);
+    img->bites = malloc(w * h * chan);
 
-    if (img->bytes == NULL) {
+    if (img->bites == NULL) {
         free(img);
         return NULL;
     }
@@ -58,7 +58,7 @@ Image* create_image(int w, int h, int chan) {
 }
 
 Image* convert_to_grayscale(const Image* img) {
-    if (img == NULL || img->bytes == NULL) return NULL;
+    if (img == NULL || img->bites == NULL) return NULL;
 
     Image* gray_img = create_image(img->width, img->height, 1);
     if (gray_img == NULL) return NULL;
@@ -66,13 +66,13 @@ Image* convert_to_grayscale(const Image* img) {
     for (int i = 0; i < img->width * img->height; i++) {
         int idx = i * img->channels;
 
-        unsigned char r = img->bytes[idx];
-        unsigned char g = img->bytes[idx + 1];
-        unsigned char b = img->bytes[idx + 2];
+        unsigned char r = img->bites[idx];
+        unsigned char g = img->bites[idx + 1];
+        unsigned char b = img->bites[idx + 2];
 
         unsigned char gray_value = (unsigned char)(0.299f * r + 0.587f * g + 0.114f * b);
 
-        gray_img->bytes[i] = gray_value;
+        gray_img->bites[i] = gray_value;
     }
 
     return gray_img;
