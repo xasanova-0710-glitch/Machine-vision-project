@@ -10,7 +10,8 @@ typedef struct Image { //структура для хранения изобра
 } Image;
 
 Image* load_image(const char* filename);
-int save_image(const Image* img, const char* filename); //int чтобы проверить на успех операции, 1 - да, 0 - нет
+int save_image(const char* filename, const Image* img); //int чтобы проверить на успех операции, 1 - да, 0 - нет
+Image* create_image(int w, int h, int chan);
 Image* convert_to_grayscale(const Image* img);
 void free_image(Image* img); //не const, так как const - обещание функции, что она не будет изменять данные
 
